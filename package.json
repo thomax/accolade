@@ -1,0 +1,36 @@
+{
+  "name": "accolade",
+  "version": "0.0.1",
+  "description": "A naive skill alogorithm",
+  "homepage": "https://github.com/thomax/accolade#readme",
+  "author": "Thomas Drevon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thomax/accolade/issues"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "start": "node ./lib/index.js",
+    "dev-start": "babel-node ./src/index.js",
+    "build": "babel src -d lib",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomax/accolade.git"
+  },
+  "keywords": [
+    "skill",
+    "foosball",
+    "ftw"
+  ],
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.2"
+  }
+}
