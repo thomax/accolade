@@ -52,6 +52,79 @@ New pink team fame: 78 + 37 + 3 (3, 3 and 2 are payed)
 New blue team fame: 100
 
 
+## Usage
+
+### `/rate`
+
+Based on game outcome, get new skill
+
+**POST /rate** (`Content-Type: application/json`)
+
+Request body:
+```json
+{
+  "teams": [
+    [
+      {"id": 13, "fame": 88},
+      {"id": 14, "fame": 53}
+    ],
+    [
+      {"id": 37, "fame": 75},
+      {"id": 17, "fame": 62}
+    ]
+  ]
+}
+```
+
+- Winning team first
+- `id` (player ID) is not required, but allowed
+- `fame` default: `50`
+
+```json
+{
+  "teams": [
+    [
+      {"id": 13, "fame": 94},
+      {"id": 14, "fame": 60}
+    ],
+    [
+      {"id": 37, "fame": 62},
+      {"id": 17, "fame": 56}
+    ]
+  ]
+}
+```
+
+### `/quality`
+
+Based on team composition and skill, give a percentage chance of the first team winning
+
+**POST /quality** (`Content-Type: application/json`)
+
+Request body:
+```json
+{
+  "teams": [
+    [
+      {"id": 13, "fame": 88},
+      {"id": 14, "fame": 53}
+    ],
+    [
+      {"id": 37, "fame": 75},
+      {"id": 17, "fame": 62}
+    ]
+  ]
+}
+```
+
+
+Result ((88+53)/(75+62)) (141/(141+137))*100 :
+
+```json
+{
+  "quality": 50.719
+}
+```
 
 Your only option for testing stuff atm:
 
@@ -59,3 +132,7 @@ Your only option for testing stuff atm:
 npm run dev-start
 curl -XPOST 'http://localhost:5000/rate' -H "Content-Type: application/json" -X POST -d '{"teams": [[{"id": 1, "skill": 88},{"id": 2, "skill": 50}],[{"id": 3, "skill": 70},{"id": 4, "skill": 60}]]}'
 ```
+
+## License
+
+MIT-licensed. See LICENSE.
