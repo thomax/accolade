@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use('/', routes)
 
 app.listen(app.get('port'), () => {
-  console.log("Node app is running at localhost:" + app.get('port'))
+  console.log(`Node app is running at localhost: ${app.get('port')}`)
 })
 
 module.exports = app
