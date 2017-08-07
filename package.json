@@ -13,7 +13,7 @@
     "start": "node ./lib/index.js",
     "dev-start": "babel-node ./src/index.js",
     "build": "babel src -d lib",
-    "test": "mocha"
+    "test": "mocha --require babel-register test/"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.5.2"
+    "babel-preset-env": "^1.5.2",
+    "babel-register": "^6.24.1",
+    "expect.js": "^0.3.1",
+    "mocha": "^3.5.0"
   }
 }

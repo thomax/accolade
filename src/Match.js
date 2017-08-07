@@ -18,7 +18,7 @@ class Match {
   }
 
   rate() {
-
+    return 2
   }
 
   quality() {

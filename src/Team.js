@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 
-// [
-//   {"id": 13, "fame": 88},
-//   {"id": 14, "fame": 53}
-// ],
+import Player from './Player'
 
 class Team {
+  // [
+  //   {"id": 13, "fame": 88},
+  //   {"id": 14, "fame": 53}
+  // ],
   constructor(rawTeam) {
-    this.team = rawTeam
+    this.team = rawTeam.map(player => new Player(player))
   }
 
   fame() {
