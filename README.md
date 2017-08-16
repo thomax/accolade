@@ -5,8 +5,8 @@ A naive skill algorithm behind an equally naive API
 - 1 - 100 fame
 - yall begin yo career with 50 fame
 - each participant places a bet, a percentage of current fame rounded down
-  - if you have 0 < score < 10, you're bet is 1
-  - if you have zero score, your bet is 0
+  - if you have 1 < score < 20, you're bet is 1
+  - if you have 1 score, your bet is 0
 - on victory, each winner keeps her fame and evenly divides the fame lost by the opponent(s)
   - if the the spoils can't be evenly divided, the one with the lowest fame get more
 - on defeat, each looser forfeits her fame to the opponents
@@ -29,15 +29,15 @@ New blue team fame: 94 + 56
 
 ### Two players on each team, unbalanced
 pink-team: 99 + 9 [bet size 9 + 1]
-blue-team: 100 + 0 [bet size 10 + 0]
+blue-team: 100 + 1 [bet size 10 + 0]
 
 Pink team wins: 100 + 0 = 10 points are divided between the two winners
 New pink team fame: 100 + 18 (best player could only keep 1 fame, the rest is divide to team mates)
-New blue team fame: 90 + 0
+New blue team fame: 90 + 1
 
 Blue team wins: 9 + 1 = 10 points are divided between the two winners
 New pink team fame: 90 + 8
-New blue team fame: 100 + 10 (best player can keep 0 points, next player gets all)
+New blue team fame: 100 + 11 (best player can keep 0 points, next player gets all)
 
 ### Three vs one
 pink-team: 81 + 40 + 5 [bet size 8 + 4 + 1]

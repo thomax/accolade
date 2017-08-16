@@ -1,21 +1,27 @@
 /* eslint-disable no-console */
 
-import {betSizePercentage} from '../config/app.json'
+import {betSizePercentage, initialFame, minFame} from '../config/app.json'
+
+function calculateBetSize(fame) {
+  if (fame === minFame) {
+    return 0
+  }
+  if (fame < 10) {
+    return 1
+  }
+  return Math.floor(fame * betSizePercentage / 100)
+}
 
 class Player {
 
   //   {"id": 14, "fame": 53}
   constructor(rawPlayer) {
-    this.fame = rawPlayer.fame
-    this.betSize = Math.floor(this.fame * betSizePercentage / 100)
+    this.fame = rawPlayer.fame || initialFame
+    this.betSize = calculateBetSize(this.fame)
   }
 
-  adjustForDefeat() {
-
-  }
-
-  adjustForVictory() {
-
+  adjustFame(amount) {
+    this.fame = this.fame + amount
   }
 
 }
