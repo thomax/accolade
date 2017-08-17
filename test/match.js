@@ -1,6 +1,23 @@
 import assert from 'assert'
 import Match from '../src/Match'
 
+function absoluteFameUnchanged(before, after) {
+  let fameBefore = 0
+  let fameAfter = 0
+  before.teams.forEach(team => {
+    team.forEach(player => {
+      fameBefore += player.fame
+    })
+  })
+  after.teams.forEach(team => {
+    team.forEach(player => {
+      fameAfter += player.fame
+    })
+  })
+  return fameBefore === fameAfter
+}
+
+
 describe('Match', () => {
 
   const simpleCase = {
@@ -31,6 +48,7 @@ describe('Match', () => {
         ]
       }
       const result = match.rate()
+      assert.strictEqual(absoluteFameUnchanged(simpleCase, expected), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -64,6 +82,7 @@ describe('Match', () => {
         ]
       }
       const result = match.rate()
+      assert.strictEqual(absoluteFameUnchanged(oneWinnerMaxesOut, expected), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -97,7 +116,7 @@ describe('Match', () => {
         ]
       }
       const result = match.rate()
-      //assert.equal(result, expected)
+      assert.strictEqual(absoluteFameUnchanged(bothWinnersMaxOut, expected), true)
       assert.deepEqual(result, expected)
     })
   })
