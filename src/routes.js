@@ -7,8 +7,9 @@ router.get('/sup', (req, res) => {
 })
 
 router.post('/rate', (req, res) => {
-  var teams = req.body.teams
-  res.status(200).type('application/json').send(JSON.stringify(teams, null, 2))
+  const match = new Match(req.body)
+  const result = match.rate()
+  res.status(200).type('application/json').send(JSON.stringify(result, null, 2))
 })
 
 router.post('/quality', (req, res) => {

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import {maxFame, minFame} from '../config/app.json'
+import {maxFame} from '../config/app.json'
 
 
 import Player from './Player'
@@ -20,30 +20,63 @@ class Team {
     return totalFame
   }
 
-  combinedDebt() {
-    let bet = 0
-    this.team.forEach(player => (bet += player.betSize))
-    return bet
+  collectDebt() {
+    let collected = 0
+    this.team.forEach(player => {
+      collected += player.betSize
+      player.adjustFame(-player.betSize)
+    })
+    return collected
   }
 
   receivePrize(prize) {
     let amountHandedOut = 0
     let keepOn = true
-    const playersSorted = this.team.sort((a, b) => {
-      return a.fame - b.fame
-    })
+    const playersSorted = this.sortedPlayers()
     while (keepOn) {
       const before = amountHandedOut
+      let anyLeft = amountHandedOut < prize
       playersSorted.forEach(player => {
-        if (player.fame < maxFame) {
+        const playerCanTakeMore = player.fame < maxFame
+        if (playerCanTakeMore && anyLeft) {
           player.adjustFame(1)
-          amountHandedOut += 1
-          keepOn = amountHandedOut < prize // stop when there's nothing left to hand out
+          amountHandedOut++
         }
+        anyLeft = amountHandedOut < prize
       })
-      keepOn = before < amountHandedOut // stop when nothing has been handed out this pass
+      // stop when nothing has been handed out this pass
+      keepOn = before < amountHandedOut
     }
+    // return any fame not handed out
     return prize - amountHandedOut
+  }
+
+  // Winners couldn't take all the fame, transfer overflow back
+  receiveOverflow(overflow) {
+    console.log('receiveOverflow', overflow)
+    let amountHandedOut = 0
+    const playersSorted = this.sortedPlayers()
+    let anyLeft = amountHandedOut < overflow
+    while (anyLeft) {
+      let handoutCounter = 1
+      playersSorted.forEach(player => {
+        console.log(`${player.id} (${player.fame})`)
+        const playerReceivedLessThanBetSize = handoutCounter < player.betSize
+        if (playerReceivedLessThanBetSize) {
+          player.adjustFame(1)
+          console.log(`   +1 == ${player.fame}`)
+          amountHandedOut++
+        }
+        anyLeft = amountHandedOut < overflow
+      })
+      handoutCounter++
+    }
+  }
+
+  sortedPlayers() {
+    return [].concat(this.team).sort((a, b) => {
+      return a.fame - b.fame
+    })
   }
 }
 

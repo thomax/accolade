@@ -16,6 +16,7 @@ class Player {
 
   //   {"id": 14, "fame": 53}
   constructor(rawPlayer) {
+    this.id = rawPlayer.id
     this.fame = rawPlayer.fame || initialFame
     this.betSize = calculateBetSize(this.fame)
   }

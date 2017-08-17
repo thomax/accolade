@@ -24,10 +24,21 @@ class Match {
     const loosingTeam = this.teams[1]
 
     // collect debt from loosing team
-    const loosingTeamDebt = loosingTeam.combinedDebt()
-    const overflow = winningTeam.receivePrize(loosingTeamDebt)
+    const loosingTeamDebt = loosingTeam.collectDebt()
     // transfer from looser to winner
+    const overflow = winningTeam.receivePrize(loosingTeamDebt)
     // if winner cant take all, transfer back
+    loosingTeam.receiveOverflow(overflow)
+    return {
+      teams: [
+        winningTeam.team.map(player => {
+          return {id: player.id, fame: player.fame}
+        }),
+        loosingTeam.team.map(player => {
+          return {id: player.id, fame: player.fame}
+        }),
+      ]
+    }
   }
 
   quality() {
