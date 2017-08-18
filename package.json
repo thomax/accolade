@@ -8,9 +8,9 @@
   "bugs": {
     "url": "https://github.com/thomax/accolade/issues"
   },
-  "main": "app/lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "start": "node app/lib/index.js",
+    "start": "node lib/index.js",
     "dev-start": "babel-node ./src/index.js",
     "build": "babel src -d app/lib",
     "test": "mocha --require babel-register test/"
