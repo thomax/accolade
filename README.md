@@ -17,7 +17,9 @@ A naive skill algorithm behind an equally naive HTTP API
 
 ### `/rate`
 
-Based on game outcome, get new fame
+Based on game outcome, get new fame.
+
+Request body must contain teams with players and their individual fame. Accolade assumes the first team in the list won the match, then returns the same teams with adjusted fame.
 
 **POST /rate** (`Content-Type: application/json`)
 
@@ -78,16 +80,13 @@ Request body:
 }
 ```
 
-
-Result ((88+53)/(75+62)) (141/(141+137))*100 :
-
 ```json
 {
   "quality": 50.719
 }
 ```
 
-Your only option for testing stuff atm:
+Try it out
 
 ```
 npm run dev-start
