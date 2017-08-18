@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import {betSizePercentage, initialFame, minFame} from '../config/app.json'
+import {betSizePercentage, initialFame, minFame, maxFame} from '../config/app.json'
 
 function calculateBetSize(fame) {
   if (fame === minFame) {
@@ -14,7 +14,6 @@ function calculateBetSize(fame) {
 
 class Player {
 
-  //   {"id": 14, "fame": 53}
   constructor(rawPlayer) {
     this.id = rawPlayer.id
     this.fame = rawPlayer.fame || initialFame
@@ -25,13 +24,20 @@ class Player {
     this.fame = this.fame + amount
   }
 
+
+  receivePrize() {
+    if (this.fame < maxFame) {
+      this.adjustFame(1)
+      return 1
+    }
+    return 0
+  }
+
   receiveOverflow(handoutPassCount) {
     const receivedLessThanBetSize = handoutPassCount < this.betSize
-    console.log(`${this.id} (${this.fame} // ${this.betSize}) hpc: ${handoutPassCount}`)
     let amountReceived = 0
     if (receivedLessThanBetSize) {
       this.adjustFame(1)
-      console.log(`   +1 == ${this.fame}`)
       amountReceived++
     }
     return amountReceived

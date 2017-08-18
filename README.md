@@ -1,5 +1,3 @@
-TODO: handoutPassCount is 0
-
 # accolade
 A naive skill algorithm behind an equally naive API
 
@@ -132,7 +130,7 @@ Your only option for testing stuff atm:
 
 ```
 npm run dev-start
-curl -XPOST 'http://localhost:5000/rate' -H "Content-Type: application/json" -X POST -d '{"teams": [[{"id": 1, "skill": 88},{"id": 2, "skill": 50}],[{"id": 3, "skill": 70},{"id": 4, "skill": 60}]]}'
+curl -XPOST 'http://localhost:5000/rate' -H "Content-Type: application/json" -X POST -d '{"teams": [[{"id": 1, "fame": 50},{"id": 2, "fame": 50}],[{"id": 3, "fame": 40},{"id": 4, "fame": 40}]]}'
 ```
 
 ## License
