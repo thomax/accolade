@@ -60,7 +60,7 @@ Request body:
 
 ### `/quality`
 
-Based on team composition and fame, give a percentage chance of the first team winning
+Based on team composition and fame, give a percentage chance of the first team winning, plus individual bet size
 
 **POST /quality** (`Content-Type: application/json`)
 
@@ -69,12 +69,12 @@ Request body:
 {
   "teams": [
     [
-      {"id": 13, "fame": 88},
-      {"id": 14, "fame": 53}
+      {"id": 1, "fame": 50},
+      {"id": 2, "fame": 89}
     ],
     [
-      {"id": 37, "fame": 75},
-      {"id": 17, "fame": 62}
+      {"id": 3, "fame": 71},
+      {"id": 4, "fame": 40}
     ]
   ]
 }
@@ -82,13 +82,41 @@ Request body:
 
 ```json
 {
-  "quality": 50.719
+  "quality": 55.60000000000001,
+  "teams": [
+    [
+      {
+        "id": 1,
+        "fame": 50,
+        "betSize": 5
+      },
+      {
+        "id": 2,
+        "fame": 89,
+        "betSize": 8
+      }
+    ],
+    [
+      {
+        "id": 3,
+        "fame": 71,
+        "betSize": 7
+      },
+      {
+        "id": 4,
+        "fame": 40,
+        "betSize": 4
+      }
+    ]
+  ]
 }
 ```
 
 Try it out
 
 ```
+npm install
+npm run test
 npm run dev-start
 curl -XPOST 'http://localhost:5000/rate' -H "Content-Type: application/json" -X POST -d '{"teams": [[{"id": 1, "fame": 50},{"id": 2, "fame": 50}],[{"id": 3, "fame": 40},{"id": 4, "fame": 40}]]}'
 ```
