@@ -35,8 +35,14 @@ describe("Match", () => {
       const match = new Match(simpleCase)
       const expected = {
         teams: [
-          [{ id: 1, fame: 94 }, { id: 2, fame: 60 }],
-          [{ id: 3, fame: 68 }, { id: 4, fame: 56 }]
+          [
+            { id: 1, fame: 94 },
+            { id: 2, fame: 60 }
+          ],
+          [
+            { id: 3, fame: 68 },
+            { id: 4, fame: 56 }
+          ]
         ]
       }
       const result = match.rate()
@@ -273,11 +279,11 @@ describe("Match", () => {
     })
   })
 
-  const betPreservationOne = {
+  const betPreservation = {
     teams: [
       [
         { id: 1, fame: 100 }, // 10
-        { id: 2, fame: 99 } // 9
+        { id: 2, fame: 95 } // 9
       ],
       [
         { id: 3, fame: 80 }, // 8
@@ -285,24 +291,24 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() betPreservationOne", () => {
-    it.only("works", () => {
-      const match = new Match(betPreservationOne)
+  describe("#rate() betPreservation", () => {
+    it("works", () => {
+      const match = new Match(betPreservation)
       const expected = {
         teams: [
           [
             { id: 1, fame: 100 },
-            { id: 2, fame: 99 }
+            { id: 2, fame: 100 }
           ],
           [
-            { id: 3, fame: 79 },
+            { id: 3, fame: 75 },
             { id: 4, fame: 2 }
           ]
         ]
       }
       const result = match.rate()
-      //assert.strictEqual(absoluteFameUnchanged(betPreservationOne, expected), true)
-      assert.equal(result, expected)
+      assert.strictEqual(absoluteFameUnchanged(betPreservation, expected), true)
+      assert.deepEqual(result, expected)
     })
   })
 
