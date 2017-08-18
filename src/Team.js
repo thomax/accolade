@@ -30,6 +30,7 @@ class Team {
   }
 
   receivePrize(prize) {
+    console.log('receivePrize', prize)
     let amountHandedOut = 0
     let keepOn = true
     const playersSorted = this.sortedPlayers()
@@ -37,9 +38,11 @@ class Team {
       const before = amountHandedOut
       let anyLeft = amountHandedOut < prize
       playersSorted.forEach(player => {
+        console.log(`${player.id} (${player.fame})`)
         const playerCanTakeMore = player.fame < maxFame
         if (playerCanTakeMore && anyLeft) {
           player.adjustFame(1)
+          console.log(`   +1 == ${player.fame}`)
           amountHandedOut++
         }
         anyLeft = amountHandedOut < prize
@@ -52,24 +55,19 @@ class Team {
   }
 
   // Winners couldn't take all the fame, transfer overflow back
-  receiveOverflow(overflow) {
-    console.log('receiveOverflow', overflow)
+  handleOverflow(overflow) {
+    console.log('handleOverflow', overflow)
     let amountHandedOut = 0
     const playersSorted = this.sortedPlayers()
     let anyLeft = amountHandedOut < overflow
     while (anyLeft) {
-      let handoutCounter = 1
+      let handoutPassCount = 0
       playersSorted.forEach(player => {
-        console.log(`${player.id} (${player.fame})`)
-        const playerReceivedLessThanBetSize = handoutCounter < player.betSize
-        if (playerReceivedLessThanBetSize) {
-          player.adjustFame(1)
-          console.log(`   +1 == ${player.fame}`)
-          amountHandedOut++
-        }
+        amountHandedOut += player.receiveOverflow(handoutPassCount)
         anyLeft = amountHandedOut < overflow
       })
-      handoutCounter++
+      console.log('  -- next pass')
+      handoutPassCount++
     }
   }
 

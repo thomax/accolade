@@ -1,3 +1,5 @@
+TODO: handoutPassCount is 0
+
 # accolade
 A naive skill algorithm behind an equally naive API
 

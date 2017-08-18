@@ -25,6 +25,18 @@ class Player {
     this.fame = this.fame + amount
   }
 
+  receiveOverflow(handoutPassCount) {
+    const receivedLessThanBetSize = handoutPassCount < this.betSize
+    console.log(`${this.id} (${this.fame} // ${this.betSize}) hpc: ${handoutPassCount}`)
+    let amountReceived = 0
+    if (receivedLessThanBetSize) {
+      this.adjustFame(1)
+      console.log(`   +1 == ${this.fame}`)
+      amountReceived++
+    }
+    return amountReceived
+  }
+
 }
 
 export default Player

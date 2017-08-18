@@ -28,7 +28,7 @@ class Match {
     // transfer from looser to winner
     const overflow = winningTeam.receivePrize(loosingTeamDebt)
     // if winner cant take all, transfer back
-    loosingTeam.receiveOverflow(overflow)
+    loosingTeam.handleOverflow(overflow)
     return {
       teams: [
         winningTeam.team.map(player => {
