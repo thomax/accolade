@@ -1,6 +1,6 @@
-# accolade
+# Accolade
 
-A naive skill algorithm behind an equally naive HTTP API
+A naive skill algorithm
 
 ## Design notes
 - 1 - 100 fame
