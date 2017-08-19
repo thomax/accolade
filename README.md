@@ -1,37 +1,29 @@
 # Accolade
 
-A naive skill algorithm
+A naive, stateless skill algorithm based on the following principles:
 
-## Design notes
-- 1 - 100 fame
-- yall begin yo career with 50 fame
-- each participant places a bet, a percentage of current fame rounded down
-  - if you have 1 < score < 20, you're bet is 1
-  - if you have 1 score, your bet is 0
-- on victory, each winner keeps her fame and evenly divides the fame lost by the opponent(s)
-  - if the the spoils can't be evenly divided, the one with the lowest fame get more
-- on defeat, each looser forfeits her fame to the opponents
-- the amount of fame present in the system at any given time is 50 * number_of_players
+`Fame` is the currency in question.
+
+- Each players begins with a mediocre fame value (default `initialFame: 50`).
+- There is an absolute floor (default `minFame: 1`) and ceiling (default `minFame: 100`) fame value.
+- When competing, each participant bets a percentage of their fame (default `betSizePercentage: 10`).
+- Winners divide the pot, losers forfeit their fame.
+- A competitor with 1 fame can't go lower, and thereby risks nothing by competing. Likewise, a competitor with 100 fame can't go higher and can only hope to keep the same position.
+- If one winner can't receive all fame gained from a match, her team mates receive the overflow.
+- If none of the winners are able to absorb all the fame (due to maxed out values), the fame is transferred back to the loosers.
+
 
 ## Usage
 
-```
-git clone ...
-npm install
-npm run test
-```
+Accolade assumes the first team in the list (`matchData.teams`) are the winners and returns teams and players in the same order, with fame adjusted according to the internal algorithm.
 
-Accolade assumes the first team in the list won the match, then returns the same teams with adjusted fame.
+```
+npm install accolade
+```
 
 ```
 import Accolade from 'accolade'
-const config = {
-  betSizePercentage: 10,
-  maxFame: 100,
-  minFame: 1,
-  initialFame: 50
-}
-const accolade = Accolade(config)
+const accolade = Accolade() // pass you own config to override [the default config](https://github.com/thomax/accolade/blob/master/config/defaultConfig.json)
 
 const matchData = {
   teams: [
@@ -46,10 +38,9 @@ const matchData = {
   ]
 }
 const match = accolade.createMatch(matchData)
-match.rate()
-match.quality()
+match.quality() // use this to get bet size
+match.rate() // use this to calculate match result (change in fame)
 ```
-
 
 ## License
 
