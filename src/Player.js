@@ -1,23 +1,22 @@
 /* eslint-disable no-console */
 
-import {betSizePercentage, initialFame, minFame, maxFame} from '../config/app.json'
-
-function calculateBetSize(fame) {
-  if (fame === minFame) {
+function calculateBetSize(fame, config) {
+  if (fame === config.minFame) {
     return 0
   }
   if (fame < 10) {
     return 1
   }
-  return Math.floor(fame * betSizePercentage / 100)
+  return Math.floor(fame * config.betSizePercentage / 100)
 }
 
 class Player {
 
-  constructor(rawPlayer) {
+  constructor(rawPlayer, config) {
     this.id = rawPlayer.id
-    this.fame = rawPlayer.fame || initialFame
-    this.betSize = calculateBetSize(this.fame)
+    this.fame = rawPlayer.fame || config.initialFame
+    this.betSize = calculateBetSize(this.fame, config)
+    this.config = config
   }
 
   adjustFame(amount) {
@@ -26,7 +25,7 @@ class Player {
 
 
   receivePrize() {
-    if (this.fame < maxFame) {
+    if (this.fame < this.config.maxFame) {
       this.adjustFame(1)
       return 1
     }

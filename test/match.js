@@ -1,5 +1,7 @@
-import assert from "assert"
-import Match from "../src/Match"
+import assert from 'assert'
+import config from '../config/defaultConfig.json'
+import Accolade from '../src/index'
+const accolade = Accolade(config)
 
 function absoluteFameUnchanged(before, after) {
   let fameBefore = 0
@@ -17,7 +19,7 @@ function absoluteFameUnchanged(before, after) {
   return fameBefore === fameAfter
 }
 
-describe("Match", () => {
+describe('Match', () => {
   const simpleCase = {
     teams: [
       [
@@ -30,9 +32,10 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() simpleCase", () => {
-    it("works", () => {
-      const match = new Match(simpleCase)
+  describe('#rate() simpleCase', () => {
+    it('works', () => {
+      const match = accolade.createMatch(simpleCase)
+
       const expected = {
         teams: [
           [
@@ -46,7 +49,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(simpleCase, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(simpleCase, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -63,9 +66,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() oneWinnerMaxesOut", () => {
-    it("works", () => {
-      const match = new Match(oneWinnerMaxesOut)
+  describe('#rate() oneWinnerMaxesOut', () => {
+    it('works', () => {
+      const match = accolade.createMatch(oneWinnerMaxesOut)
       const expected = {
         teams: [
           [{ id: 1, fame: 100 }, { id: 2, fame: 64 }],
@@ -74,7 +77,7 @@ describe("Match", () => {
       }
       const result = match.rate()
       assert.strictEqual(
-        absoluteFameUnchanged(oneWinnerMaxesOut, expected),
+        absoluteFameUnchanged(oneWinnerMaxesOut, result),
         true
       )
       assert.deepEqual(result, expected)
@@ -93,9 +96,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() bothWinnersMaxOut", () => {
-    it("works", () => {
-      const match = new Match(bothWinnersMaxOut)
+  describe('#rate() bothWinnersMaxOut', () => {
+    it('works', () => {
+      const match = accolade.createMatch(bothWinnersMaxOut)
       const expected = {
         teams: [
           [
@@ -110,7 +113,7 @@ describe("Match", () => {
       }
       const result = match.rate()
       assert.strictEqual(
-        absoluteFameUnchanged(bothWinnersMaxOut, expected),
+        absoluteFameUnchanged(bothWinnersMaxOut, result),
         true
       )
       assert.deepEqual(result, expected)
@@ -128,9 +131,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() oneVsTwo", () => {
-    it("works", () => {
-      const match = new Match(oneVsTwo)
+  describe('#rate() oneVsTwo', () => {
+    it('works', () => {
+      const match = accolade.createMatch(oneVsTwo)
       const expected = {
         teams: [
           [
@@ -143,7 +146,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(oneVsTwo, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(oneVsTwo, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -159,9 +162,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() twoVsOne", () => {
-    it("works", () => {
-      const match = new Match(twoVsOne)
+  describe('#rate() twoVsOne', () => {
+    it('works', () => {
+      const match = accolade.createMatch(twoVsOne)
       const expected = {
         teams: [
           [
@@ -174,7 +177,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(twoVsOne, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(twoVsOne, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -189,9 +192,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() oneVsOneOverflow", () => {
-    it("works", () => {
-      const match = new Match(oneVsOneOverflow)
+  describe('#rate() oneVsOneOverflow', () => {
+    it('works', () => {
+      const match = accolade.createMatch(oneVsOneOverflow)
       const expected = {
         teams: [
           [
@@ -203,7 +206,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(oneVsOneOverflow, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(oneVsOneOverflow, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -221,9 +224,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() unbalancedOne", () => {
-    it("works", () => {
-      const match = new Match(unbalancedOne)
+  describe('#rate() unbalancedOne', () => {
+    it('works', () => {
+      const match = accolade.createMatch(unbalancedOne)
       const expected = {
         teams: [
           [
@@ -237,7 +240,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(unbalancedOne, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(unbalancedOne, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -256,9 +259,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() unbalancedTwo", () => {
-    it("works", () => {
-      const match = new Match(unbalancedTwo)
+  describe('#rate() unbalancedTwo', () => {
+    it('works', () => {
+      const match = accolade.createMatch(unbalancedTwo)
       const expected = {
         teams: [
           [
@@ -274,7 +277,7 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(unbalancedTwo, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(unbalancedTwo, result), true)
       assert.deepEqual(result, expected)
     })
   })
@@ -291,9 +294,9 @@ describe("Match", () => {
       ]
     ]
   }
-  describe("#rate() betPreservation", () => {
-    it("works", () => {
-      const match = new Match(betPreservation)
+  describe('#rate() betPreservation', () => {
+    it('works', () => {
+      const match = accolade.createMatch(betPreservation)
       const expected = {
         teams: [
           [
@@ -307,7 +310,28 @@ describe("Match", () => {
         ]
       }
       const result = match.rate()
-      assert.strictEqual(absoluteFameUnchanged(betPreservation, expected), true)
+      assert.strictEqual(absoluteFameUnchanged(betPreservation, result), true)
+      assert.deepEqual(result, expected)
+    })
+  })
+
+  describe('#quality() simpleCase', () => {
+    it('works', () => {
+      const match = accolade.createMatch(simpleCase)
+      const expected = {
+        quality: 50.719424460431654,
+        teams: [
+          [
+            { id: 1, fame: 88, betSize: 8 },
+            { id: 2, fame: 53, betSize: 5 }
+          ],
+          [
+            { id: 3, fame: 75, betSize: 7 },
+            { id: 4, fame: 62, betSize: 6 }
+          ]
+        ]
+      }
+      const result = match.quality()
       assert.deepEqual(result, expected)
     })
   })

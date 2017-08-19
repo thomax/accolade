@@ -3,8 +3,8 @@ import Team from './Team'
 
 class Match {
 
-  constructor(rawMatch) {
-    this.teams = rawMatch.teams.map(team => new Team(team))
+  constructor(rawMatch, config) {
+    this.teams = rawMatch.teams.map(team => new Team(team, config))
   }
 
   rate() {
@@ -35,7 +35,14 @@ class Match {
   quality() {
     const teamOneFame = this.teams[0].fame()
     const teamOneTwo = this.teams[1].fame()
-    return teamOneFame / (teamOneFame + teamOneTwo) * 100
+    return {
+      quality: teamOneFame / (teamOneFame + teamOneTwo) * 100,
+      teams: this.teams.map(item => {
+        return item.team.map(player => {
+          return {id: player.id, fame: player.fame, betSize: player.betSize}
+        })
+      })
+    }
   }
 }
 

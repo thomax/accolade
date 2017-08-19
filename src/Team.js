@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
 
-import { maxFame } from '../config/app.json'
-
 import Player from './Player'
 
 class Team {
 
-  constructor(rawTeam) {
-    this.team = rawTeam.map(player => new Player(player))
+  constructor(rawTeam, config) {
+    this.team = rawTeam.map(player => new Player(player, config))
   }
 
   fame() {

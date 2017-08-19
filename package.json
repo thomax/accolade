@@ -10,8 +10,6 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "start": "node lib/index.js",
-    "dev-start": "babel-node ./src/index.js",
     "build": "babel src -d lib",
     "test": "mocha --require babel-register test/"
   },
@@ -24,17 +22,10 @@
     "foosball",
     "ftw"
   ],
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.15.3"
-  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.5.2",
     "babel-register": "^6.24.1",
-    "deep-equal": "^1.0.1",
-    "expect.js": "^0.3.1",
     "mocha": "^3.5.0"
   }
 }
