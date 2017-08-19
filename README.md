@@ -1,6 +1,8 @@
 # Accolade
 
-A naive, stateless skill algorithm based on the following principles:
+A naive, stateless skill algorithm intended for use in foosball, but might also work for other games where two teams are opposed, such as Counter-Strike or table tennis.
+
+Accolade is based on the following principles:
 
 - `Fame` is the currency in question.
 - Each players begins with a mediocre fame value (default `initialFame: 50`).
