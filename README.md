@@ -2,8 +2,7 @@
 
 A naive, stateless skill algorithm based on the following principles:
 
-`Fame` is the currency in question.
-
+- `Fame` is the currency in question.
 - Each players begins with a mediocre fame value (default `initialFame: 50`).
 - There is an absolute floor (default `minFame: 1`) and ceiling (default `minFame: 100`) fame value.
 - When competing, each participant bets a percentage of their fame (default `betSizePercentage: 10`).
