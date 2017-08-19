@@ -25,6 +25,12 @@ Accolade assumes the first team in the list won the match, then returns the same
 
 ```
 import Accolade from 'accolade'
+const config = {
+  betSizePercentage: 10,
+  maxFame: 100,
+  minFame: 1,
+  initialFame: 50
+}
 const accolade = Accolade(config)
 
 const matchData = {

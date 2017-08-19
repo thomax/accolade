@@ -1,9 +1,7 @@
 import Match from './Match'
 import defaultConfig from '../config/defaultConfig.json'
 
-
 module.exports = function Accolade(config = defaultConfig) {
-
   return {
     createMatch: createMatch
   }
