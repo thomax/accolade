@@ -22,7 +22,7 @@ npm install accolade
 
 ```
 import Accolade from 'accolade'
-const accolade = Accolade() // pass you own config to override [the default config](https://github.com/thomax/accolade/blob/master/config/defaultConfig.json)
+const accolade = Accolade() // pass you own config object to override config/defaultConfig.json
 
 const matchData = {
   teams: [
