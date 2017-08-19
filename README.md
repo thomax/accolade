@@ -24,7 +24,7 @@ npm install accolade
 
 ```
 import Accolade from 'accolade'
-const accolade = Accolade() // pass you own config object to override config/defaultConfig.json
+const accolade = Accolade() // pass your own config object to override config/defaultConfig.json
 
 const matchData = {
   teams: [
@@ -39,8 +39,8 @@ const matchData = {
   ]
 }
 const match = accolade.createMatch(matchData)
-match.quality() // use this to get bet size
-match.rate() // use this to calculate match result (change in fame)
+match.quality() // get pre-match betSize for each player
+match.rate() // calculate match result -> change in fame
 ```
 
 ## License
