@@ -1,6 +1,6 @@
 # Accolade
 
-A naive, stateless skill algorithm intended for use in foosball, but might also work for other games where two teams are opposed, such as Counter-Strike or table tennis.
+A naive, stateless, ladder-like skill algorithm intended for use in foosball, but might also work for other games where two teams are opposed, such as Counter-Strike or table tennis.
 
 Accolade is based on the following principles:
 

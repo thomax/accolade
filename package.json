@@ -20,7 +20,8 @@
   "keywords": [
     "skill",
     "foosball",
-    "ftw"
+    "ftw",
+    "ladder"
   ],
   "devDependencies": {
     "babel-cli": "^6.24.1",
