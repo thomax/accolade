@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-import Team from './Team'
+import Team from "./Team"
 
 class Match {
-
   constructor(rawMatch, config) {
     this.teams = rawMatch.teams.map(team => new Team(team, config))
   }
@@ -23,10 +22,10 @@ class Match {
     return {
       teams: [
         winningTeam.team.map(player => {
-          return {id: player.id, fame: player.fame}
+          return player.export()
         }),
         loosingTeam.team.map(player => {
-          return {id: player.id, fame: player.fame}
+          return player.export()
         })
       ]
     }
@@ -39,7 +38,7 @@ class Match {
       quality: teamOneFame / (teamOneFame + teamOneTwo) * 100,
       teams: this.teams.map(item => {
         return item.team.map(player => {
-          return {id: player.id, fame: player.fame, betSize: player.betSize}
+          return player.export({includeBetSize: true})
         })
       })
     }

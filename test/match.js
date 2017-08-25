@@ -54,6 +54,42 @@ describe('Match', () => {
     })
   })
 
+  describe('#rate() simpleCase keep incoming keys', () => {
+
+    const simpleCaseKeepKeys = {
+      teams: [
+        [
+          { _id: 1, fame: 88, name: 'foo'  }, // 8
+          { _id: 2, fame: 53, name: 'bar'  } // 5
+        ],
+        [
+          { _id: 3, fame: 75, name: 'baz'  }, // 7
+          { _id: 4, fame: 62, name: 'bakkabakka'  } // 6
+        ]
+      ]
+    }
+
+    it('works', () => {
+      const match = accolade.createMatch(simpleCaseKeepKeys)
+
+      const expected = {
+        teams: [
+          [
+            { _id: 1, fame: 94, name: 'foo' },
+            { _id: 2, fame: 60, name: 'bar'  }
+          ],
+          [
+            { _id: 3, fame: 68, name: 'baz'  },
+            { _id: 4, fame: 56, name: 'bakkabakka'  }
+          ]
+        ]
+      }
+      const result = match.rate()
+      assert.strictEqual(absoluteFameUnchanged(simpleCaseKeepKeys, result), true)
+      assert.deepEqual(result, expected)
+    })
+  })
+
   const oneWinnerMaxesOut = {
     teams: [
       [

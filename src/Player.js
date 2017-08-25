@@ -13,7 +13,7 @@ function calculateBetSize(fame, config) {
 class Player {
 
   constructor(rawPlayer, config) {
-    this.id = rawPlayer.id
+    this.rawPlayer = rawPlayer
     this.fame = rawPlayer.fame || config.initialFame
     this.betSize = calculateBetSize(this.fame, config)
     this.config = config
@@ -40,6 +40,14 @@ class Player {
       amountReceived++
     }
     return amountReceived
+  }
+
+  export(options = {}) {
+    const player = Object.assign({}, this.rawPlayer, {fame: this.fame})
+    if (options.includeBetSize) {
+      player.betSize = this.betSize
+    }
+    return player
   }
 
 }
