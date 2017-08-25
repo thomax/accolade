@@ -90,6 +90,114 @@ describe('Match', () => {
     })
   })
 
+  describe('#rate() bizarreCase keep incoming keys', () => {
+
+    const bizarreCaseKeepKeys = {
+      teams: [
+        [
+          {
+            _id: "56bb4d47d7dc1daa74fcd53d",
+            mu: 25,
+            sigma: 8.333333333333334,
+            skill: [
+              25,
+              8.333333333333334
+            ],
+            fame: 50
+          },
+          {
+            _id: "56bb4d47d7dc1daa74fcd53e",
+            mu: 25,
+            sigma: 8.333333333333334,
+            skill: [
+              25,
+              8.333333333333334
+            ],
+            fame: 50
+          }
+        ],
+        [
+          {
+            _id: "56bb4d47d7dc1daa74fcd53f",
+            mu: 25,
+            sigma: 8.333333333333334,
+            skill: [
+              25,
+              8.333333333333334
+            ],
+            fame: 50
+          },
+          {
+            _id: "56bb4d47d7dc1daa74fcd540",
+            mu: 25,
+            sigma: 8.333333333333334,
+            skill: [
+              25,
+              8.333333333333334
+            ],
+            fame: 50
+          }
+        ]
+      ]
+    }
+
+    it('works', () => {
+      const match = accolade.createMatch(bizarreCaseKeepKeys)
+
+      const expected = {
+        teams: [
+          [
+            {
+              _id: "56bb4d47d7dc1daa74fcd53d",
+              mu: 25,
+              sigma: 8.333333333333334,
+              skill: [
+                25,
+                8.333333333333334
+              ],
+              fame: 55
+            },
+            {
+              _id: "56bb4d47d7dc1daa74fcd53e",
+              mu: 25,
+              sigma: 8.333333333333334,
+              skill: [
+                25,
+                8.333333333333334
+              ],
+              fame: 55
+            }
+          ],
+          [
+            {
+              _id: "56bb4d47d7dc1daa74fcd53f",
+              mu: 25,
+              sigma: 8.333333333333334,
+              skill: [
+                25,
+                8.333333333333334
+              ],
+              fame: 45
+            },
+            {
+              _id: "56bb4d47d7dc1daa74fcd540",
+              mu: 25,
+              sigma: 8.333333333333334,
+              skill: [
+                25,
+                8.333333333333334
+              ],
+              fame: 45
+            }
+          ]
+        ]
+      }
+      const result = match.rate()
+      assert.strictEqual(absoluteFameUnchanged(bizarreCaseKeepKeys, result), true)
+      assert.deepEqual(result, expected)
+    })
+  })
+
   const oneWinnerMaxesOut = {
     teams: [
       [
