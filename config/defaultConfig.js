@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   betSizePercentage: 10,
   maxFame: 100,
   minFame: 1,
