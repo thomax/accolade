@@ -1,5 +1,5 @@
 import assert from 'assert'
-import config from '../config/defaultConfig.json'
+import config from '../config/defaultConfig'
 import Accolade from '../src/index'
 const accolade = Accolade(config)
 

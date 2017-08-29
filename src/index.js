@@ -1,5 +1,5 @@
 import Match from './Match'
-import defaultConfig from '../config/defaultConfig.json'
+import defaultConfig from '../config/defaultConfig'
 
 module.exports = function Accolade(config = defaultConfig) {
   return {
