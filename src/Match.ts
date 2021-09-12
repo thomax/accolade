@@ -1,9 +1,15 @@
-/* eslint-disable no-console */
-import Team from './Team'
+import {AccoladeConfig} from './Config'
+import {RawPlayer} from './Player'
+import {Team} from './Team'
 
-class Match {
-  constructor(rawMatch, config) {
-    this.teams = rawMatch.teams.map(team => new Team(team, config))
+export interface MatchData {
+  teams: RawPlayer[][]
+}
+export class Match {
+  public teams: Team[]
+
+  constructor(rawMatch: MatchData, config: AccoladeConfig) {
+    this.teams = rawMatch.teams.map((team) => new Team(team, config))
   }
 
   rate() {
@@ -21,13 +27,13 @@ class Match {
 
     return {
       teams: [
-        winningTeam.team.map(player => {
+        winningTeam.team.map((player) => {
           return player.export()
         }),
-        loosingTeam.team.map(player => {
+        loosingTeam.team.map((player) => {
           return player.export()
-        })
-      ]
+        }),
+      ],
     }
   }
 
@@ -35,16 +41,12 @@ class Match {
     const teamOneFame = this.teams[0].fame()
     const teamOneTwo = this.teams[1].fame()
     return {
-      quality: teamOneFame / (teamOneFame + teamOneTwo) * 100,
-      teams: this.teams.map(item => {
-        return item.team.map(player => {
+      quality: (teamOneFame / (teamOneFame + teamOneTwo)) * 100,
+      teams: this.teams.map((item) => {
+        return item.team.map((player) => {
           return player.export({includeBetSize: true})
         })
-      })
+      }),
     }
   }
 }
-
-export default Match
-
-/* eslint-enable no-console */

@@ -1,5 +1,5 @@
 .DS_Store
-src
+/src
+/test
+/data
 node_modules
-test
-data

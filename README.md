@@ -13,7 +13,6 @@ Accolade is based on the following principles:
 - If one winner can't receive all fame gained from a match, her team mates receive the overflow.
 - If none of the winners are able to absorb all the fame (due to maxed out values), the fame is transferred back to the loosers.
 
-
 ## Usage
 
 Accolade assumes the first team in the list (`matchData.teams`) are the winners and returns teams and players in the same order, with fame adjusted according to the internal algorithm.
@@ -22,23 +21,23 @@ Accolade assumes the first team in the list (`matchData.teams`) are the winners 
 npm install accolade
 ```
 
-```
-import Accolade from 'accolade'
-const accolade = Accolade() // pass your own config object to override config/defaultConfig.js
+```ts
+import {createMatch} from 'accolade'
 
 const matchData = {
   teams: [
     [
       {id: 1, fame: 50},
-      {id: 2, fame: 89}
+      {id: 2, fame: 89},
     ],
     [
       {id: 3, fame: 71},
-      {id: 4, fame: 40}
-    ]
-  ]
+      {id: 4, fame: 40},
+    ],
+  ],
 }
-const match = accolade.createMatch(matchData)
+
+const match = createMatch(matchData /*, optional config */)
 match.quality() // get pre-match betSize for each player
 match.rate() // calculate match result -> change in fame
 ```
